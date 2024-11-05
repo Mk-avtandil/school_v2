@@ -8,8 +8,6 @@ use App\Models\Grade;
 
 class GradeRepository extends ModuleRepository
 {
-    
-
     public function __construct(Grade $model)
     {
         $this->model = $model;

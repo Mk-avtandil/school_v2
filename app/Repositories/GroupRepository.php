@@ -8,7 +8,7 @@ use App\Models\Group;
 
 class GroupRepository extends ModuleRepository
 {
-    
+    protected $relatedBrowsers = ['students', 'teachers'];
 
     public function __construct(Group $model)
     {
