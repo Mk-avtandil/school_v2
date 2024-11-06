@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Course;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +16,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->call(CourseSeeder::class);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        DB::table('twill_users')->insert([
+            'published' => 1,
+            'created_at' => now(),
+            'name' => 'Test Admin',
+            'email' => 'admin@mail.ru',
+            'role' => 'SUPERADMIN',
+            'password' => Hash::make('admin123'),
+            'registered_at' => now(),
         ]);
     }
 }
