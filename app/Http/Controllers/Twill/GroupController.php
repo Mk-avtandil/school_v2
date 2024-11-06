@@ -6,11 +6,15 @@ use A17\Twill\Models\Contracts\TwillModelContract;
 use A17\Twill\Services\Forms\Fields\Browser;
 use A17\Twill\Services\Forms\Fields\Select;
 use A17\Twill\Services\Listings\Columns\Text;
+use A17\Twill\Services\Listings\Filters\BasicFilter;
+use A17\Twill\Services\Listings\Filters\TableFilters;
 use A17\Twill\Services\Listings\TableColumns;
+use Illuminate\Database\Eloquent\Builder;
 use A17\Twill\Services\Forms\Fields\Input;
 use A17\Twill\Services\Forms\Form;
 use A17\Twill\Http\Controllers\Admin\ModuleController as BaseModuleController;
 use App\Models\Course;
+use App\Models\Group;
 use App\Models\Student;
 use App\Models\Teacher;
 
@@ -79,6 +83,19 @@ class GroupController extends BaseModuleController
         );
 
         return $form;
+    }
+
+    public function filters(): TableFilters
+    {
+        return TableFilters::make([
+            BasicFilter::make()
+                ->label('Course')
+                ->queryString('course_id')
+                ->options(collect(Course::all()->pluck('title', 'id')))
+                ->apply(function (Builder $builder, string $value) {
+                    $builder->where('course_id', $value);
+                }),
+        ]);
     }
 
     /**
