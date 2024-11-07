@@ -58,7 +58,6 @@ class GroupController extends BaseModuleController
     {
         $form = Form::make(self::$formFields);
 
-
         $form->add(
             Browser::make()
                 ->name('teachers')

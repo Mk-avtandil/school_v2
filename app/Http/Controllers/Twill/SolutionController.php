@@ -31,12 +31,16 @@ class SolutionController extends BaseModuleController
                 ->name('homework_id')
                 ->label('Homework')
                 ->options(
-                    Homework::with('lesson')
-                        ->get()
-                        ->pluck('lesson.title', 'id')
-                        ->mapWithKeys(function ($lessonTitle, $homeworkId) {
-                            $homework = Homework::find($homeworkId);
-                            return [$homeworkId => $lessonTitle . ' - ' . $homework->title];
+                    Homework::with('lesson.course')
+                    ->get()
+                        ->mapWithKeys(function ($homework) {
+                            $courseTitle = $homework->lesson->course->title;
+                            $lessonTitle = $homework->lesson->title;
+                            $homeworkTitle = $homework->title;
+
+                            return [
+                                $homework->id => $courseTitle . '//' . $lessonTitle . '//' . $homeworkTitle
+                            ];
                         })
                         ->toArray()
                 ),

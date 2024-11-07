@@ -41,7 +41,7 @@ class HomeworkController extends BaseModuleController
                     ->pluck('course.title', 'id')
                     ->mapWithKeys(function ($courseTitle, $lessonId) {
                         $lesson = Lesson::find($lessonId);
-                        return [$lessonId => $courseTitle . ' - ' . $lesson->title];
+                        return [$lessonId => $courseTitle . '//' . $lesson->title];
                     })
                     ->toArray()
                 )
@@ -89,7 +89,7 @@ class HomeworkController extends BaseModuleController
                         ->pluck('course.title', 'id')
                         ->mapWithKeys(function ($courseTitle, $lessonId) {
                             $lesson = Lesson::find($lessonId);
-                            return [$lessonId => $courseTitle . ' - ' . $lesson->title];
+                            return [$lessonId => $courseTitle . '//' . $lesson->title];
                         })
                         ->toArray()
                 )
@@ -131,7 +131,7 @@ class HomeworkController extends BaseModuleController
                         ->pluck('course.title', 'id')
                         ->mapWithKeys(function ($courseTitle, $lessonId) {
                             $lesson = Lesson::find($lessonId);
-                            return [$lessonId => $courseTitle . ' - ' . $lesson->title];
+                            return [$lessonId => $courseTitle . '//' . $lesson->title];
                         })
                     )
                 )
@@ -159,7 +159,7 @@ class HomeworkController extends BaseModuleController
         $table->add(
             Text::make()->field('lesson_id')->title('Course and Lesson')->customRender(function ($item) {
                 $lesson = Lesson::find($item->lesson_id);
-                return $lesson->course->title . ' - ' . $lesson->title;
+                return $lesson->course->title . '//' . $lesson->title;
             }),
         );
 
