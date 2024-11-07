@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Twill;
 
 use A17\Twill\Models\Contracts\TwillModelContract;
 use A17\Twill\Services\Forms\Fields\Files;
-use A17\Twill\Services\Forms\Fields\Medias;
+use Illuminate\Database\Eloquent\Builder;
 use A17\Twill\Services\Forms\Fields\Select;
 use A17\Twill\Services\Listings\Columns\Text;
+use A17\Twill\Services\Listings\Filters\BasicFilter;
+use A17\Twill\Services\Listings\Filters\TableFilters;
 use A17\Twill\Services\Listings\TableColumns;
 use A17\Twill\Services\Forms\Fields\Input;
 use A17\Twill\Services\Forms\Form;
@@ -50,6 +52,19 @@ class LessonController extends BaseModuleController
                 ->note('Choose files to upload')
                 ->max(5)
         ];
+    }
+
+    public function filters(): TableFilters
+    {
+        return TableFilters::make([
+            BasicFilter::make()
+                ->label('Course')
+                ->queryString('course_id')
+                ->options(collect(Course::all()->pluck('title', 'id')))
+                ->apply(function (Builder $builder, string $value) {
+                    $builder->where('course_id', $value);
+                }),
+        ]);
     }
 
     public function getCreateForm(): Form

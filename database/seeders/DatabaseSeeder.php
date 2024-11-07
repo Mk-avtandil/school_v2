@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Course;
+use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +19,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(CourseSeeder::class);
+        $this->call(GroupSeeder::class);
+        $this->call(TeacherSeeder::class);
+        $this->call(StudentSeeder::class);
+        $this->call(LessonSeeder::class);
 
         DB::table('twill_users')->insert([
             'published' => 1,

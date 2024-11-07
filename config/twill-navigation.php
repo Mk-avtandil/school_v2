@@ -21,5 +21,9 @@ return [
     'teachers' => [
         'title' => 'Teachers',
         'route' => 'twill.teachers.index',
+    ],
+    'homeworks' => [
+        'title' => 'Homeworks',
+        'route' => 'twill.homeworks.index',
     ]
 ];

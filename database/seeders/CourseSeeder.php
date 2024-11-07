@@ -14,6 +14,7 @@ class CourseSeeder extends Seeder
     public function run(): void
     {
         Course::create([
+            'id' => 1,
             'title' => 'English',
             'description' => 'American English',
             'price' => 10000,
@@ -21,6 +22,7 @@ class CourseSeeder extends Seeder
         ]);
 
         Course::create([
+            'id' => 2,
             'title' => 'Spanish',
             'description' => 'New course',
             'price' => 12000,
@@ -28,6 +30,7 @@ class CourseSeeder extends Seeder
         ]);
 
         Course::create([
+            'id' => 3,
             'title' => 'Backend',
             'description' => 'bootcamp course',
             'price' => 15000,

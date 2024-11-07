@@ -17,7 +17,6 @@ class Teacher extends Model
         'first_name',
         'last_name',
         'birthday',
-        'address',
         'phone',
         'email',
     ];
