@@ -13,13 +13,19 @@ use A17\Twill\Http\Controllers\Admin\ModuleController as BaseModuleController;
 class CourseController extends BaseModuleController
 {
     protected $moduleName = 'courses';
+    private static array $formFields;
     /**
      * This method can be used to enable/disable defaults. See setUpController in the docs for available options.
      */
     protected function setUpController(): void
     {
         $this->disablePermalink();
-        $this->enableSkipCreateModal();
+
+        self::$formFields = [
+            Input::make()->name('title')->label('Title'),
+            Wysiwyg::make()->name('description')->label('Description'),
+            Input::make()->name('price')->label('Price')
+        ];
     }
 
     /**
@@ -28,22 +34,7 @@ class CourseController extends BaseModuleController
      */
     public function getForm(TwillModelContract $model): Form
     {
-        $form = parent::getForm($model);
-
-
-        $form->add(
-            Input::make()->name('title')->label('Title')
-        );
-
-        $form->add(
-            Wysiwyg::make()->name('description')->label('Description')
-        );
-
-        $form->add(
-            Input::make()->name('price')->label('Price')
-        );
-
-        return $form;
+        return Form::make(self::$formFields);
     }
 
     /**

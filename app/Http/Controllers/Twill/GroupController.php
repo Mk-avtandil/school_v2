@@ -20,6 +20,7 @@ use App\Models\Teacher;
 class GroupController extends BaseModuleController
 {
     protected $moduleName = 'groups';
+    private static array $formFields;
 
     /**
      * This method can be used to enable/disable defaults. See setUpController in the docs for available options.
@@ -27,7 +28,26 @@ class GroupController extends BaseModuleController
     protected function setUpController(): void
     {
         $this->disablePermalink();
-        $this->enableSkipCreateModal();
+
+        self::$formFields = [
+            Select::make()
+                ->name('course_id')
+                ->label('Course')
+                ->options(
+                    Course::all('id', 'title')
+                        ->pluck('title', 'id')
+                        ->toArray()
+                ),
+            Input::make()->name('title')->label('Title'),
+            Input::make()->name('description')->label('Description'),
+            Input::make()->name('start_time')->label('Start Time')->placeholder('00:00:00'),
+            Input::make()->name('end_time')->label('End Time')->placeholder('00:00:00'),
+        ];
+    }
+
+    public function getCreateForm(): Form
+    {
+        return Form::make(self::$formFields);
     }
 
     /**
@@ -36,41 +56,15 @@ class GroupController extends BaseModuleController
      */
     public function getForm(TwillModelContract $model): Form
     {
-        $form = parent::getForm($model);
+        $form = Form::make(self::$formFields);
 
-        $form->add(
-            Input::make()->name('title')->label('Title')
-        );
-
-        $form->add(
-            Input::make()->name('description')->label('Description')
-        );
-
-        $form->add(
-            Input::make()->name('start_time')->label('Start Time')->placeholder('00:00:00')
-        );
-
-        $form->add(
-            Input::make()->name('end_time')->label('End Time')->placeholder('00:00:00')
-        );
-
-        $form->add(
-            Select::make()
-                ->name('course_id')
-                ->label('Course')
-                ->options(
-                    Course::all('id', 'title')
-                        ->pluck('title', 'id')
-                        ->toArray()
-                )
-        );
 
         $form->add(
             Browser::make()
                 ->name('teachers')
                 ->note('Add teacher to group')
                 ->modules([Teacher::class])
-                ->max(5)
+                ->max(5),
         );
 
         $form->add(
@@ -78,7 +72,7 @@ class GroupController extends BaseModuleController
                 ->name('students')
                 ->note('Add students to group')
                 ->modules([Student::class])
-                ->max(100)
+                ->max(100),
         );
 
         return $form;

@@ -15,15 +15,17 @@ return [
             'homeworks' => [
                 'title' => 'Homeworks',
                 'module' => true,
+                'secondary_navigation' => [
+                    'solutions' => [
+                        'title' => 'Solutions',
+                        'module' => true,
+                    ],
+                    'grades' => [
+                        'title' => 'Grades',
+                        'module' => true,
+                    ]
+                ]
             ],
-            'solutions' => [
-                'title' => 'Solutions',
-                'module' => true,
-            ],
-            'grades' => [
-                'title' => 'Grades',
-                'module' => true,
-            ]
         ]
     ],
     'students' => [

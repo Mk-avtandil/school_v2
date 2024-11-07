@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Homework;
+use App\Models\Solution;
 use App\Models\Student;
 use App\Models\Teacher;
 use Illuminate\Database\Migrations\Migration;
@@ -15,9 +15,9 @@ return new class extends Migration
             // this will create an id, a "published" column, and soft delete and timestamps columns
             createDefaultTableFields($table);
 
-            $table->foreignIdFor(Student::class)->onDelete('cascade');
-            $table->foreignIdFor(Teacher::class)->onDelete('cascade');
-            $table->foreignIdFor(Homework::class)->onDelete('cascade');
+            $table->foreignIdFor(Student::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(Teacher::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(Solution::class)->constrained()->onDelete('cascade');
             $table->integer('grade');
             $table->text('feedback')->nullable();
         });

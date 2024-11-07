@@ -7,6 +7,7 @@ use A17\Twill\Models\Behaviors\HasRelated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use A17\Twill\Models\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Teacher extends Model
 {
@@ -24,6 +25,11 @@ class Teacher extends Model
     public function groups(): belongsToMany
     {
         return $this->belongsToMany(Group::class, 'twill_related', 'subject_id', 'related_id');
+    }
+
+    public function grades(): HasMany
+    {
+        return $this->hasMany(Grade::class);
     }
 
 }
