@@ -67,17 +67,17 @@ class GroupController extends BaseModuleController
 
         $form->add(
             Browser::make()
-                ->modules([Teacher::class])
                 ->name('teachers')
                 ->note('Add teacher to group')
+                ->modules([Teacher::class])
                 ->max(5)
         );
 
         $form->add(
             Browser::make()
-                ->modules([Student::class])
                 ->name('students')
                 ->note('Add students to group')
+                ->modules([Student::class])
                 ->max(100)
         );
 

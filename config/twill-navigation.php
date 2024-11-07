@@ -11,6 +11,18 @@ return [
             'lessons' => [
                 'title' => 'Lessons',
                 'module' => true,
+            ],
+            'homeworks' => [
+                'title' => 'Homeworks',
+                'module' => true,
+            ],
+            'solutions' => [
+                'title' => 'Solutions',
+                'module' => true,
+            ],
+            'grades' => [
+                'title' => 'Grades',
+                'module' => true,
             ]
         ]
     ],
@@ -22,8 +34,4 @@ return [
         'title' => 'Teachers',
         'route' => 'twill.teachers.index',
     ],
-    'homeworks' => [
-        'title' => 'Homeworks',
-        'route' => 'twill.homeworks.index',
-    ]
 ];

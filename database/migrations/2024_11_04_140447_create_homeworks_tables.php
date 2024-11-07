@@ -13,9 +13,9 @@ return new class extends Migration
             // this will create an id, a "published" column, and soft delete and timestamps columns
             createDefaultTableFields($table);
 
-            $table->foreignIdFor(Lesson::class)->onDelete('cascade');
+            $table->foreignIdFor(Lesson::class)->constrained()->onDelete('cascade');
             $table->string('title', 200);
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->date('deadline');
         });
 

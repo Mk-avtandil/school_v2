@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Group extends Model
 {
     use HasFactory, HasRelated;
+
     protected $fillable = [
         'published',
         'title',

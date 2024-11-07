@@ -77,13 +77,7 @@ class LessonController extends BaseModuleController
      */
     public function getForm(TwillModelContract $model): Form
     {
-        $form = parent::getForm($model);
-
-        foreach (self::$formFields as $field) {
-            $form->add($field);
-        }
-
-        return $form;
+        return Form::make(self::$formFields);
     }
 
     /**

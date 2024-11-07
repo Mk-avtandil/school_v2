@@ -18,7 +18,7 @@ return [
                 ],
             ],
         ],
-        'files' => ['lesson_files'],
+        'files' => ['lesson_files', 'solution_files'],
     ],
 
     'file_library' => [
