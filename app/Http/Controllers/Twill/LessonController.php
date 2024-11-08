@@ -27,6 +27,15 @@ class LessonController extends BaseModuleController
         $this->disablePermalink();
 
         self::$formFields = [
+            Select::make()
+                ->name('course_id')
+                ->label('Course')
+                ->options(
+                    Course::all('id', 'title')
+                        ->pluck('title', 'id')
+                        ->toArray()
+                ),
+
             Input::make()
                 ->name('title')
                 ->label('Title')
@@ -36,15 +45,6 @@ class LessonController extends BaseModuleController
                 ->name('description')
                 ->label('Description')
                 ->required(),
-
-            Select::make()
-                ->name('course_id')
-                ->label('Course')
-                ->options(
-                    Course::all('id', 'title')
-                        ->pluck('title', 'id')
-                        ->toArray()
-                ),
 
             Files::make()
                 ->name('lesson_files')

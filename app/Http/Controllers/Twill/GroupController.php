@@ -34,10 +34,9 @@ class GroupController extends BaseModuleController
                 ->name('course_id')
                 ->label('Course')
                 ->options(
-                    Course::all('id', 'title')
-                        ->pluck('title', 'id')
-                        ->toArray()
+                    Course::all('id', 'title')->pluck('title', 'id')->toArray()
                 ),
+
             Input::make()->name('title')->label('Title'),
             Input::make()->name('description')->label('Description'),
             Input::make()->name('start_time')->label('Start Time')->placeholder('00:00:00'),
@@ -63,7 +62,7 @@ class GroupController extends BaseModuleController
                 ->name('teachers')
                 ->note('Add teacher to group')
                 ->modules([Teacher::class])
-                ->max(5),
+                ->max(5)
         );
 
         $form->add(
@@ -71,7 +70,7 @@ class GroupController extends BaseModuleController
                 ->name('students')
                 ->note('Add students to group')
                 ->modules([Student::class])
-                ->max(100),
+                ->max(25)
         );
 
         return $form;

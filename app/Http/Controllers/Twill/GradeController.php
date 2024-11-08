@@ -32,9 +32,16 @@ class GradeController extends BaseModuleController
                 ->name('solution_id')
                 ->label('Solution')
                 ->options(
-                    Solution::all('id', 'title')
-                        ->pluck('title', 'id')
-                        ->toArray()
+                    Solution::all()->mapWithKeys(function ($solution) {
+                        $homeworkTitle = $solution->homework->title;
+                        $lessonTitle = $solution->homework->lesson->title;
+                        $courseTitle = $solution->homework->lesson->course->title;
+                        $student = $solution->student->first_name . ' ' . $solution->student->last_name;
+
+                        return [
+                            $solution->id => "{$courseTitle}//{$lessonTitle}//{$homeworkTitle}//{$student}"
+                        ];
+                    })->toArray()
                 ),
 
             Select::make()

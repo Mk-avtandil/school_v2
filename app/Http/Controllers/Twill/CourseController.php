@@ -28,6 +28,11 @@ class CourseController extends BaseModuleController
         ];
     }
 
+    public function getCreateForm(): Form
+    {
+        return Form::make(self::$formFields);
+    }
+
     /**
      * See the table builder docs for more information. If you remove this method you can use the blade files.
      * When using twill:module:make you can specify --bladeForm to use a blade form instead.
@@ -54,4 +59,14 @@ class CourseController extends BaseModuleController
 
         return $table;
     }
+
+//    public function getSideFieldsets(TwillModelContract $model): Form
+//    {
+//
+//        $form = Form::make();
+//        $form->add(Input::make()->name('title')->label('Title'));
+//        $form->add(Input::make()->name('description'));
+//
+//        return $form;
+//    }
 }
